@@ -1,0 +1,32 @@
+{
+  "name": "wunderlist-batch",
+  "version": "1.0.0",
+  "description": "Batch interface for Wunderlist",
+  "main": "index.js",
+  "bin": {
+    "wlbatch": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gologo13/wunderlist-batch.git"
+  },
+  "keywords": [
+    "Wunderlist"
+  ],
+  "author": "Yohei Yamaguchi <joker13meister@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gologo13/wunderlist-batch/issues"
+  },
+  "homepage": "https://github.com/gologo13/wunderlist-batch#readme",
+  "dependencies": {
+    "wunderlist": "^0.1.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-google": "^0.6.0"
+  }
+}
