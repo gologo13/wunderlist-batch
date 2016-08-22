@@ -12,13 +12,13 @@ $ npm install wunderlist-batch -g
 ## Usage
 
 ```js
-$ wlbatch configure <accessToken> <clientId>
+$ wlb configure <accessToken> <clientId>
 
-$ wlbatch create 
+$ wlb create 
 
-$ wlbatch destroy [batchId]
+$ wlb destroy [batchId]
 
-$ wlbatch list
+$ wlb list
 ```
 
 Please make sure a daemon process is supposed to run at time when you expect.

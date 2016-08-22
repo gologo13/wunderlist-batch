@@ -6,6 +6,7 @@ const Configuration = require('./util/configuration');
 module.exports = class CreateCommand {
 
   constructor() {
+    this.command = "create";
     this.configuration = (new Configuration()).load();
     this.wunderListClient = new WunderlistSdk({
       accessToken: "<YOUR_ACCESS_TOKEN>",
