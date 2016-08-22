@@ -1,52 +1,23 @@
-"use strict";
+'use strict';
 
-const WunderlistSdk = require('Wunderlist');
-const WunderListClient = new WunderlistSdk({
-  accessToken: "<YOUR_ACCESS_TOKEN>",
-  clientID: "<YOUR_CLIENT_ID>"
-});
+const argv = require('minimist')(process.argv.slice(2));
+const helpCommand = require('./commands/help');
+const configureCommand = require('./commands/configure');
+const createCommand = require('./commands/create');
 
-// FIX ME:use Promise like below.
-// const wlbatch = new WlBatch({at, clientID});
-// wlbatch.listUpLists().acceptUserInput().addTask();
-
-WunderListClient.http.lists.all()
-  .done(lists => {
-    console.log("Select one of indexes below to add a recurrence task");
-    lists.forEach((list, index) => {
-      console.log("%d: %s(%d)", index, list.title, list.id);
-    });
-
-    console.log("> ");
-
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-
-    var selectedListId = '';
-    process.stdin.on('data', chunk => {
-      selectedListId += chunk;
-    });
-
-    process.stdin.on('end', () => {
-      // There will be a trailing \n from the user hitting enter. Get rid of it.
-      selectedListId = selectedListId.replace(/\n$/, '');
-      console.log("selectedListId: %s", selectedListId);
-
-      const obj = {
-        list_id: parseInt(selectedListId, 10),           // eslint-disable-line camelcase
-        title: "WLBatch test"
-      };
-      console.log(obj);
-
-      WunderListClient.http.tasks.create(obj)
-        .done(res => {
-          console.log(res);
-        })
-        .fail(error => {
-          console.error('Failed to create a task: %s', JSON.stringify(error));
-        });
-    });
-  })
-  .fail(error => {
-    console.error('Failed to get lists: %s', JSON.stringify(error));
-  });
+if (Object.keys(argv._).length === 0) {
+  helpCommand.showUsageAll();
+} else {
+  const subCommand = argv._.shift();
+  if (subCommand === 'configure') {
+    if (Object.keys(argv._).length === 2) {
+      (new configureCommand()).execute(argv._.shift(), argv._.shift());
+    } else {
+      helpCommand.showUsageConfigure();
+    }
+  } else if (subCommand === 'create') {
+    (new createCommand()).execute();
+  } else {
+    helpCommand.showUsageAll();
+  }
+}
