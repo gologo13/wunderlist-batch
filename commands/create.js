@@ -7,10 +7,12 @@ module.exports = class CreateCommand {
 
   constructor() {
     this.command = "create";
-    this.configuration = (new Configuration()).load();
+
+    const configuration = new Configuration();
+    configuration.load();
     this.wunderListClient = new WunderlistSdk({
-      accessToken: "<YOUR_ACCESS_TOKEN>",
-      clientID: "<YOUR_CLIENT_ID>"
+      accessToken: configuration.accessToken,
+      clientID: configuration.clientId
     });
   }
 
